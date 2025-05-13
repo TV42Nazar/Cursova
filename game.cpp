@@ -271,6 +271,7 @@ using namespace constants;
                     }
     
                     clear_input();
+                    F.cleanup_field();
                     F.set_rows(r);
                     F.set_cols(c);
                     F.generate_field(tc);
