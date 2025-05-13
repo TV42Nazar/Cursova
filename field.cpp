@@ -119,7 +119,7 @@ using namespace constants;
     }
 
     // Зчитування поля з консолі
-    void field::read_field_from_stdin() {
+void field::read_field_from_stdin() {
         if (grid != nullptr) cleanup_field(); // очищення перед новим зчитуванням
 
         // Зчитування розмірів
@@ -139,8 +139,6 @@ using namespace constants;
             cout << "Invalid input. Enter a positive number for columns: ";
         }
 
-        cin.ignore(); // очищення буфера перед getline
-
         // Виділення памʼяті
         grid = new cell*[rows];
         for (int i = 0; i < rows; i++) {
@@ -150,11 +148,14 @@ using namespace constants;
         // Зчитування по рядках
         cout << "Enter the field row by row (use '" << CHAR_TREE
             << "' for tree, '" << CHAR_EMPTY
-            << "' for empty, anything else = '" << CHAR_EMPTY << "'):\n";
+            << "' for empty):\n";
 
         for (int i = 0; i < rows; i++) {
             string line;
-            getline(cin, line);
+            // тут >> std::ws спочатку з’їсть усі переводи рядка/пробіли,
+            // тому getline завжди чекатиме наступного повноцінного рядка
+            getline(cin >> ws, line);
+
             for (int j = 0; j < cols; j++) {
                 grid[i][j] = cell(i, j);
                 if (j < static_cast<int>(line.size()) && line[j] == CHAR_TREE) {
