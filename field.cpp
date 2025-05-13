@@ -117,9 +117,9 @@ using namespace constants;
             }
         }
     }
-
+    //тут поправлено
     // Зчитування поля з консолі
-void field::read_field_from_stdin() {
+        void field::read_field_from_stdin() {
         if (grid != nullptr) cleanup_field(); // очищення перед новим зчитуванням
 
         // Зчитування розмірів
